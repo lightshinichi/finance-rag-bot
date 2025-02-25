@@ -1,2 +1,2 @@
-libopenblas-dev:amd64
-libomp-dev:amd64
+libopenblas-dev
+libomp-dev
