@@ -1,2 +1,8 @@
+
+deb http://archive.ubuntu.com/ubuntu noble universe
+
+
+libopenblas-dev
+libomp-dev
 libopenblas-dev
 libomp-dev
