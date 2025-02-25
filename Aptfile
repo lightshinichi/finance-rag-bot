@@ -1,9 +1,2 @@
-# Aptfile
-openblas-64bit-dev  # New package name in Noble
-
-
-
-libopenblas-dev
-libomp-dev
-libopenblas-dev
-libomp-dev
+libopenblas-dev:amd64
+libomp-dev:amd64
