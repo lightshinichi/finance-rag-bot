@@ -1,2 +1,0 @@
-# File: apt/sources.list.d/noble-universe.list
-deb [arch=amd64] http://archive.ubuntu.com/ubuntu noble universe
