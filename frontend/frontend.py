@@ -2,9 +2,9 @@ import streamlit as st
 import requests
 import os
 
-BACKEND_URL = os.getenv("BACKEND_URL")  # Local fallback
+BACKEND_URL = os.getenv("BACKEND_URL", "https://finance-rag-bot-19bf4c184612.herokuapp.com")
 
-st.title("📄 Financce RAG bot")
+st.title("📄 Finance RAG bot")
 st.subheader("Ask questions about your stored documents")
 
 # Document processing section
