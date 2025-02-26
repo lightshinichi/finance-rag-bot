@@ -25,18 +25,17 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 app = FastAPI()
 
-# Add CORS middleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.getenv("FRONTEND_URL", "http://localhost:8501"),  
-        "http://localhost:8000"  
+        "https://dockernew-financeragbot.streamlit.app/",  
+        "http://localhost:8501"  
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Configuration
 MD_STORAGE_DIR = os.getenv("MD_STORAGE_DIR", "stored_md_files")
 FAISS_INDEX_DIR = os.getenv("FAISS_INDEX_DIR", "faiss_index")
