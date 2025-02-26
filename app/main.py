@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
+import sys
 from langchain_community.docstore.document import Document 
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
@@ -91,8 +92,18 @@ def create_vector_store():
         text_chunks = text_splitter.split_documents(raw_text)
         
         embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-        vector_store = FAISS.from_documents(text_chunks, embedding=embeddings)
-        vector_store.save_local(FAISS_INDEX_DIR)
+        vector_store = FAISS.from_documents(
+           text_chunks,
+          embedding=embeddings,
+           normalize_L2=True  # Better for CPU
+       )
+      
+       # Save with Heroku-compatible settings
+        vector_store.save_local(
+           FAISS_INDEX_DIR,
+           index_name="index_cpu"  # Force CPU index
+       )
+
         logger.info(f"Created FAISS index with {len(text_chunks)} chunks")
         return len(text_chunks)
     except Exception as e:
@@ -148,20 +159,27 @@ Sources:
     )
     return load_qa_chain(model, chain_type="stuff", prompt=prompt)
 
-@app.on_event("startup")
 async def startup_event():
-    """Initialize application with retry logic"""
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            logger.info(f"Initializing vector store (attempt {attempt+1})")
-            create_vector_store()
-            return
-        except Exception as e:
-            logger.error(f"Startup attempt {attempt+1} failed: {str(e)}")
-            if attempt == max_retries - 1:
-                logger.critical("Failed to initialize vector store")
-                raise
+    """Initialize application with better error handling"""
+    try:
+        # Ensure directories exist
+        os.makedirs(MD_STORAGE_DIR, exist_ok=True)
+        os.makedirs(FAISS_INDEX_DIR, exist_ok=True)
+        
+        # Initialize vector store with retries
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                logger.info(f"Vector store init attempt {attempt+1}")
+                create_vector_store()
+                return
+            except Exception as e:
+                logger.error(f"Attempt {attempt+1} failed: {str(e)}")
+                if attempt == max_retries - 1:
+                    raise
+    except Exception as e:
+        logger.critical(f"Critical startup failure: {str(e)}")
+        sys.exit(1)
 
 @app.get("/")
 def health_check():
@@ -204,7 +222,8 @@ async def ask_question_endpoint(request: QuestionRequest):
         vector_store = FAISS.load_local(
             FAISS_INDEX_DIR,
             embeddings,
-            allow_dangerous_deserialization=True
+            allow_dangerous_deserialization=True,
+            index_name="index_cpu"
         )
         
         docs = vector_store.similarity_search(request.question, k=5)
@@ -250,3 +269,4 @@ if __name__ == "__main__":
         host=os.getenv("HOST", "0.0.0.0"), 
         port=int(os.getenv("PORT", 8000))
     )
+
