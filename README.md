@@ -57,10 +57,24 @@ IMAGE_PROMPT = """Analyze financial visualization:
 1. **Clone Repository**
    ```bash
    git clone https://github.com/lightshinichi/finance-rag-bot.git
-   cd finance-rag-bot ```
+   cd finance-rag-bot 
 
-2 . ***Install Dependencies***
+2 . **Install Dependencies**
 ```bash
-pip install -r requirements.txt ```
+pip install -r requirements.txt
+
+3. **Environment setup**
+```bash
+echo "GOOGLE_API_KEY=your_api_key" > .env
+echo "BACKEND_URL=http://localhost:8000" >> .env
+
+4. **Start services**
+```bash
+# Backend (FastAPI)
+uvicorn app.main:app --reload --port 8000
+ 
+# Frontend (Streamlit) - New Terminal
+streamlit run frontend/app.py
+
 
    
