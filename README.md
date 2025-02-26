@@ -115,7 +115,18 @@ The system will:
 - Convert PDFs to structured markdown.
 - Build a search index.
 
-## **Project Structure**
-```markdown # Directory Structure ```plaintext finance-rag-bot/ ├── app/ # FastAPI Backend │ ├── main.py # Core API logic │ ├── stored_md_files/ # Processed documents │ └── faiss_index/ # Vector embeddings ├── frontend/ # Streamlit Interface │ ├── app.py # UI components  ├── Dockerfile # Container config └── requirements.txt # Dependency management ```
+## # Directory Structure
+
+```plaintext
+finance-rag-bot/
+├── app/                  # FastAPI Backend
+│   ├── main.py           # Core API logic( Backend)
+│   ├── stored_md_files/  # Processed documents
+│   └── faiss_index/      # Vector embeddings( Will get created)
+├── frontend/             # Streamlit Interface
+│   ├── frontend.py            # Frontend
+│   └── requirements_frontend/ # Requirements for frontend
+├── Dockerfile            # Container config
+└── requirements.txt      # # Requirements for backend```
 
    
