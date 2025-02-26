@@ -127,6 +127,7 @@ finance-rag-bot/
 │   ├── frontend.py            # Frontend
 │   └── requirements_frontend/ # Requirements for frontend
 ├── Dockerfile            # Container config
-└── requirements.txt      # # Requirements for backend```
+└── requirements.txt      # # Requirements for backend
+```
 
    
