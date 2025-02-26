@@ -1,6 +1,10 @@
 # Financial RAG (Retrieval-Augmented Generation) Bot
-
-A sophisticated question-answering system for financial documents, leveraging advanced PDF parsing and AI-powered analysis.
+[App Link](https://dockernew-financeragbot.streamlit.app/)
+## Project Overview
+A sophisticated question-answering system for financial documents that:
+- Processes PDF reports with tables/images into searchable markdown
+- Generates AI-powered insights using Google Gemini
+- Provides source-verified answers with citations
 
 ## 🛠️ Technologies Used
 
@@ -27,3 +31,36 @@ graph TD
     E --> G
     F --> H[Image Description]
     H --> G
+```
+
+### 2. ***Image-to-Text Conversion***
+
+Gemini Pro Vision Prompt:
+IMAGE_PROMPT = """Analyze financial visualization:
+1. Type: [chart/graph/table]
+2. Title/Labels: [axes/legend]
+3. Key Insights: [trends/comparisons]
+4. Numerical Data: [key figures]
+5. Interpretation: [financial implications]"""
+
+
+
+
+## Installation & Setup
+
+### Prerequisites
+- Python 3.10+
+- Google API Key ([Get Key](https://ai.google.dev))
+- Heroku CLI ([Install Guide](https://devcenter.heroku.com/articles/heroku-cli))
+
+### Local Development
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/lightshinichi/finance-rag-bot.git
+   cd finance-rag-bot ```
+
+2 . ***Install Dependencies***
+```bash
+pip install -r requirements.txt ```
+
+   
