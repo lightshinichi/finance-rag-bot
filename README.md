@@ -116,17 +116,6 @@ The system will:
 - Build a search index.
 
 ## **Project Structure**
-finance-rag-bot/
-├── app/                  # FastAPI Backend
-│   ├── main.py           # Core API logic
-│   ├── utils/            # Processing utilities
-│   ├── stored_md_files/  # Processed documents
-│   └── faiss_index/      # Vector embeddings
-├── frontend/             # Streamlit Interface
-│   ├── app.py            # UI components
-│   └── assets/           # CSS/Images
-├── tests/                # Test suite
-├── Dockerfile            # Container config
-└── requirements.txt      # Dependency management
+```markdown # Directory Structure ```plaintext finance-rag-bot/ ├── app/ # FastAPI Backend │ ├── main.py # Core API logic │ ├── stored_md_files/ # Processed documents │ └── faiss_index/ # Vector embeddings ├── frontend/ # Streamlit Interface │ ├── app.py # UI components  ├── Dockerfile # Container config └── requirements.txt # Dependency management ```
 
    
