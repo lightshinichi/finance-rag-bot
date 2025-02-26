@@ -6,3 +6,10 @@ PyPDF2
 chromadb
 faiss-cpu
 langchain_google_genai
+fastapi
+uvicorn
+langchain
+langchain-community
+openai
+chromadb
+python-dotenv
