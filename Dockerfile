@@ -1,4 +1,4 @@
-# Located in root directory
+# Use official Python image
 FROM python:3.10-slim
 
 # Set environment variables
@@ -12,18 +12,24 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc python3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory and copy requirements
+# Set working directory
 WORKDIR /app
-COPY ./requirements.txt .
+
+# Copy requirements first for caching
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
-COPY ./app ./app
-COPY ./stored_md_files ./stored_md_files
+# Copy entire application
+COPY ./app .
 
-# Expose port and run application
+# Create document storage directory
+RUN mkdir -p stored_md_files faiss_index
+
+# Expose port
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+# Start application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
