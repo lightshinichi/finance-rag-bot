@@ -6,7 +6,7 @@ A sophisticated question-answering system for financial documents that:
 - Generates AI-powered insights using Google Gemini
 - Provides source-verified answers with citations
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Component          | Technologies                                                                 |
 |--------------------|------------------------------------------------------------------------------|
@@ -17,7 +17,7 @@ A sophisticated question-answering system for financial documents that:
 | **PDF Processing** | Marker (Modified for financial docs)                                         |
 | **Infrastructure** | Heroku (Backend), Streamlit Community Cloud (Frontend)                       |
 
-## 📄 Document Preprocessing Methodology
+##  Document Preprocessing Methodology
 
 ### 1. **PDF Parsing & Structure Extraction**
 ```mermaid
